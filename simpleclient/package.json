@@ -1,0 +1,8 @@
+{
+    "name": "SimpleClient",
+    "version": "0.1.0",
+    "main": "index.html",
+    "scripts": {
+        "start": "nw ."
+    }
+}

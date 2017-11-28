@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IoTivity Simple Client</title>
+  <link rel="stylesheet" type="text/css" href="styler.css"/>
+  <script src="client.js"></script>
+</head>
+<body>
+  <div>
+    Client UUID: <label id="uuid"></label>
+  </div>
+  <div>
+    <button onclick="discoverBinarySwitch()">Discover</button>
+  </div>
+  <hr>
+  <div id="resources" style="display: none">
+    <div class="resourceHolder">
+      <label class="resourceUUID"></label>
+      <div>
+        <label class="switch">
+          <input type="checkbox" class="checkbox"><span class="slider round"></span>
+        </label>
+        <label class="resourcePath"></label>
+      </div>
+    </div>
+  </div>
+
+  <div id="statusBar"></div>
+  <script type="text/javascript">
+    document.getElementById("uuid").innerHTML = ocf.device.uuid;
+  </script>
+</body>
+</html>

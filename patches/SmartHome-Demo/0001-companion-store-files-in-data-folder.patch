@@ -1,0 +1,36 @@
+From 972ff56d530fe5fd4730d02216549d35745f9da6 Mon Sep 17 00:00:00 2001
+From: Tonny Tzeng <tonny.tzeng@gmail.com>
+Date: Thu, 16 Nov 2017 11:12:45 +0800
+Subject: [PATCH] companion: store files in /data folder
+
+---
+ .../app/src/main/java/com/intel/otc/iot/smarthome/OcClient.java     | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/smarthome-companion/app/src/main/java/com/intel/otc/iot/smarthome/OcClient.java b/smarthome-companion/app/src/main/java/com/intel/otc/iot/smarthome/OcClient.java
+index 07c5cd4..73031ab 100644
+--- a/smarthome-companion/app/src/main/java/com/intel/otc/iot/smarthome/OcClient.java
++++ b/smarthome-companion/app/src/main/java/com/intel/otc/iot/smarthome/OcClient.java
+@@ -25,8 +25,6 @@ import java.util.List;
+ import java.util.Map;
+ import java.util.concurrent.TimeUnit;
+ 
+-import static android.os.Environment.getExternalStorageDirectory;
+-
+ public class OcClient implements OcPlatform.OnResourceFoundListener {
+     private static final String TAG = OcClient.class.getSimpleName();
+     private static final String SVR_DB_NAME = "oic_svr_db.dat";
+@@ -41,9 +39,7 @@ public class OcClient implements OcPlatform.OnResourceFoundListener {
+     private Map<OcResourceIdentifier, OcResource> mResourceFound = new HashMap<>();
+ 
+     public OcClient(Context context, OnResourceFound listener) {
+-        // TODO: store files in package installed folder in /data with getFilesDir()
+-        dbPath = getExternalStorageDirectory().getAbsolutePath() + File.separator
+-               + context.getPackageName() + File.separator;
++        dbPath = context.getFilesDir().getPath() + File.separator;
+         File dbDir = new File(dbPath);
+         if (!(dbDir.isDirectory())) {
+             // Create the folder if not exist
+-- 
+2.7.4
+
