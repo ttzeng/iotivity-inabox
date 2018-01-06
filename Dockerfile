@@ -127,10 +127,10 @@ RUN : === install build dependencies \
         uuid-dev libexpat1-dev libglib2.0-dev libsqlite3-dev libcurl4-gnutls-dev \
  && : === checkout the source \
  && git clone https://gerrit.iotivity.org/gerrit/p/iotivity.git $IOTIVITY \
- && git checkout 1.3.0 \
+ && git checkout 1.3.1 \
  && : === pull the tinycbor and mbedtls projects before building IoTivity \
  && git clone https://github.com/01org/tinycbor.git extlibs/tinycbor/tinycbor -b v0.4.1 \
- && git clone https://github.com/ARMmbed/mbedtls.git extlibs/mbedtls/mbedtls -b mbedtls-2.4.0 \
+ && git clone https://github.com/ARMmbed/mbedtls.git extlibs/mbedtls/mbedtls -b mbedtls-2.4.2 \
  && : === build targets \
  && scons TARGET_OS=android ANDROID_HOME=$ANDROID_HOME TARGET_ARCH=armeabi java \
  && scons TARGET_OS=android ANDROID_HOME=$ANDROID_HOME TARGET_ARCH=x86     java
@@ -141,7 +141,7 @@ RUN apt-get update && apt-get install -y maven \
         -Dfile=$IOTIVITY/java/iotivity-android/build/outputs/aar/iotivity-base-x86-release.aar \
         -DgroupId=org.iotivity \
         -DartifactId=base \
-        -Dversion=1.3.0-secured \
+        -Dversion=1.3.1-secured \
         -Dpackaging=aar
 
 ### Build SmartHome companion app
@@ -151,7 +151,7 @@ RUN : === setup SmartHome-Demo repo \
  && git clone https://github.com/intel/SmartHome-Demo.git \
  && cd SmartHome-Demo \
  && git config user.email "docker@localhost" \
- && git am $TEMP/patches/*.patch \
+ && if [ -f $TEMP/patches/*.patch ]; then git am $TEMP/patches/*.patch; fi \
  && : === build the companion app \
  && cd smarthome-companion \
  && echo 'sdk.dir='$ANDROID_HOME > local.properties \
