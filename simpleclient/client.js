@@ -1,6 +1,11 @@
 var ocf = require('iotivity-node'),
     client = ocf.client;
 
+ocf.device = Object.assign(ocf.device, {
+    coreSpecVersion: 'ocf.1.1.0',
+    dataModels: ['res.1.1.0']
+});
+
 var switchesFound;
 
 function serverError(error) {

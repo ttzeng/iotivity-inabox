@@ -2,6 +2,11 @@ var argv = process.argv,
     device = require('iotivity-node'),
     server = device.server;
 
+device.device = Object.assign(device.device, {
+    coreSpecVersion: 'ocf.1.1.0',
+    dataModels: ['res.1.1.0']
+});
+
 // Parse parameters from the command line
 var resourceId = 'switch';
 if (argv.length > 2)
